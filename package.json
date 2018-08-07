@@ -1,0 +1,20 @@
+{
+  "name": "maths-leaderboard",
+  "version": "1.0.0",
+  "description": "A leaderboard for the 'Maths is Fun' script - a minigame inside TagPro where players answer arithmic sequences.\r Small and bad example of the script (pay attention to chat and name): https://streamable.com/80wxq",
+  "main": "index.js",
+  "dependencies": {
+    "bcrypt": "^3.0.0",
+    "express": "^4.16.3",
+    "helmet": "^3.13.0",
+    "mongodb": "^3.1.1",
+    "nodemon": "^1.18.3",
+    "npm": "^6.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
