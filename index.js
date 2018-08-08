@@ -70,39 +70,57 @@ app.post('/submit', jsonParser, (req, res) => {
     });
 
     // insert and update database
-    function upsertDb(callback){
+    function upsertDb(){
+        let somekindoferror;
         MongoClient.connect(murl, (err, db) => {
             if (err) {
                 console.log('Error! ' + err)
-                res.sendStatus(500);  
+                somekindoferror = err;
                 return;
             }
-            let dbo = db.db("maths");
-            /*
-            req.body.forEach(element => {
-                dbo.collection("players").update(
-                    {_id: element._id},
-                    {_id: element._id,  $inc:{answers: element.answers} },
-                    {upsert: true}
-                )
-                .then(() => console.log('inserted'))
+
+            for(let i = 0; i < req.body.length; i++) {  //loop through all player objects.
+                let el = req.body[i];
+                
+                let dbo = db.db("maths");
+                dbo.collection("players").find({_id: el._id}).limit(1).hasNext()
+                .then((foundPlayer) => {
+                    if (foundPlayer){
+                        dbo.collection("players").update(
+                            {_id: el._id},
+                            {$inc:{answers: el.answers} },
+                        )
+                        .then(() => console.log('updated', el._id))
+                        .then(() => { if(i == req.body.length - 1) endUpsert(db, somekindoferror)})
+                        .catch((err) => {
+                            console.log('Error at updating', el._id , err);
+                            somekindoferror = err;
+                        });
+                    }
+                    else{
+                        dbo.collection("players").insertOne(el)
+                        .then(() => console.log('inserted', el._id))
+                        .then(() => { if(i == req.body.length - 1) endUpsert(db, somekindoferror)})
+                        .catch((err) => {
+                            console.log('Error at inserting', el._id, err);
+                            somekindoferror = err;
+                        });
+                    }
+                })
                 .catch((err) => {
                     console.log(err);
-                    res.sendStatus(500);  
-                    return;
-                });
-            });
-            db.close();
-            callback();
-            */
+                });          
+            }
         });
     }
-    upsertDb( () => {
-        console.log('upsert finshed')
-        res.sendStatus(418)
+    function endUpsert(db, somekindoferror){
+        let status
+        somekindoferror.errmsg ? status = 400 : status = 200;
+        res.sendStatus(status);
+        db.close();
         return;
-    });
-
+    }
+    upsertDb();
 });
 
 

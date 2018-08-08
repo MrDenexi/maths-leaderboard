@@ -1,7 +1,6 @@
 let token = 'yB7J9NP1dWHUGUdZwvck5YEKMTeAhJaboNzkeJZiSCQ=';
-let data = [{_id: 'Comakip', answers: 38},{_id: 'ruff', answers: 3},{_id: 'Jerry', answers: 11},{_id: 'Ballk', answers: 12}];
-let data1 = {_id: 'Comakip', answers: 38};
-console.log(JSON.stringify(data1));
+let data = [{_id: 'Comakip', answers: 3},{_id: 'ruff', answers: 3},{_id: 'Jerry', answers: 11},{_id: 'Ballk', answers: 12}];
+let data1 = [{_id: 'Comakip', answers: 38}];
 
 function json(response) {
   return response.json()
