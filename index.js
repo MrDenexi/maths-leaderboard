@@ -127,8 +127,14 @@ app.post('/submit', jsonParser, (req, res) => {
 // Leaderboard
 app.get('/*', (req, res) => {
     function getPlayers(callback){
-        players = 'hoi';
-        callback(players);
+        MongoClient.connect(murl, (err, db) => {
+            let dbo = db.db("maths");
+            dbo.collection("players").find().sort({answers: -1})
+            .toArray((err, result) => {
+                if (err) console.log(err);
+                callback(result);
+            })
+        });
     }
     getPlayers((result) => res.send(result));
 });
