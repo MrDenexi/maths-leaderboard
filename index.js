@@ -72,35 +72,35 @@ app.post('/submit', jsonParser, (req, res) => {
     // insert and update database
     function upsertDb(){
         let somekindoferror;
-        MongoClient.connect(murl, (err, db) => {
-            if (err) {
+        MongoClient.connect(murl, (err, db) => {    //connect to mongodb
+            if (err) {                              //random errorblock because we can
                 console.log('Error! ' + err)
                 somekindoferror = err;
                 return;
             }
 
             for(let i = 0; i < req.body.length; i++) {  //loop through all player objects.
-                let el = req.body[i];
+                let el = req.body[i];                   //selecting element
                 
                 let dbo = db.db("maths");
-                dbo.collection("players").find({_id: el._id}).limit(1).hasNext()
+                dbo.collection("players").find({_id: el._id}).limit(1).hasNext()    //check if player is already in db
                 .then((foundPlayer) => {
-                    if (foundPlayer){
+                    if (foundPlayer){   //if player is in database -> update answers of player
                         dbo.collection("players").update(
                             {_id: el._id},
                             {$inc:{answers: el.answers} },
                         )
                         .then(() => console.log('updated', el._id))
-                        .then(() => { if(i == req.body.length - 1) endUpsert(db, somekindoferror)})
+                        .then(() => { if(i == req.body.length - 1) endUpsert(db, somekindoferror)}) //check if this was the last one -> go to endUpsert
                         .catch((err) => {
                             console.log('Error at updating', el._id , err);
                             somekindoferror = err;
                         });
                     }
-                    else{
+                    else{   //if player is not in database 
                         dbo.collection("players").insertOne(el)
                         .then(() => console.log('inserted', el._id))
-                        .then(() => { if(i == req.body.length - 1) endUpsert(db, somekindoferror)})
+                        .then(() => { if(i == req.body.length - 1) endUpsert(db, somekindoferror)}) //check if this was the last one -> go to endUpsert
                         .catch((err) => {
                             console.log('Error at inserting', el._id, err);
                             somekindoferror = err;
@@ -115,7 +115,7 @@ app.post('/submit', jsonParser, (req, res) => {
     }
     function endUpsert(db, somekindoferror){
         let status
-        somekindoferror.errmsg ? status = 400 : status = 200;
+        somekindoferror.errmsg ? status = 400 : status = 200; //check for errormessages, and replace status.
         res.sendStatus(status);
         db.close();
         return;
