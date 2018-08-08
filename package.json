@@ -18,8 +18,10 @@
   },
   "homepage": "https://github.com/MrDenexi/maths-leaderboard#readme",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "express": "^4.16.3",
     "mongodb": "^3.1.1",
-    "node": "^10.8.0"
+    "node": "^10.8.0",
+    "nodemon": "^1.18.3"
   }
 }
