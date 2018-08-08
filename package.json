@@ -3,18 +3,23 @@
   "version": "1.0.0",
   "description": "A leaderboard for the 'Maths is Fun' script - a minigame inside TagPro where players answer arithmic sequences.\r Small and bad example of the script (pay attention to chat and name): https://streamable.com/80wxq",
   "main": "index.js",
-  "dependencies": {
-    "bcrypt": "^3.0.0",
-    "express": "^4.16.3",
-    "helmet": "^3.13.0",
-    "mongodb": "^3.1.1",
-    "nodemon": "^1.18.3",
-    "npm": "^6.3.0"
-  },
-  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrDenexi/maths-leaderboard.git"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MrDenexi/maths-leaderboard/issues"
+  },
+  "homepage": "https://github.com/MrDenexi/maths-leaderboard#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "mongodb": "^3.1.1",
+    "node": "^10.8.0"
+  }
 }
