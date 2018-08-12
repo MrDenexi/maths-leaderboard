@@ -1,0 +1,16 @@
+html
+  head
+    title= 'Maths is fun - Leaderboard'
+  body
+    h1= 'hoi'
+    ul
+    table 
+        tr
+            th= 'Name'
+            th= 'Answers'
+            th= 'Last seen'
+        tr
+        each player in players 
+            tr   
+                td= player._id
+                td= player.answers
