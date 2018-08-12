@@ -1,16 +1,23 @@
 html
-  head
-    title= 'Maths is fun - Leaderboard'
-  body
-    h1= 'hoi'
-    ul
-    table 
-        tr
-            th= 'Name'
-            th= 'Answers'
-            th= 'Last seen'
-        tr
-        each player in players 
-            tr   
-                td= player._id
-                td= player.answers
+    head
+        title= 'Maths is fun Leaderboard!'
+        link(href="https://fonts.googleapis.com/css?family=Amatic+SC|Lato" rel="stylesheet")
+        style
+            include index.css           
+    body
+        header
+            h1='Maths is fun' 
+            h4='Leaderboard'
+        main
+            table 
+                tr
+                    th
+                    th= 'Name'
+                    th= 'Correct answers'
+                    th= 'Last seen'
+                each player, index in players 
+                    tr
+                        td= index+1   
+                        td= player._id
+                        td= player.answers
+                        td

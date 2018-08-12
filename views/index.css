@@ -1,0 +1,48 @@
+body{
+    text-align: center;
+    background-image: url("squared-paper-texture_1154-677.jpg");
+    background-repeat: repeat;
+}
+header{
+    margin: 0 auto;
+    font-size: 5em;
+    font-family: 'Amatic SC', sans-serif;
+    margin: 10px;
+    color: black;
+}
+header *{ margin: 0}
+
+main{
+    width: 600px;
+    margin: 0 auto;
+}
+
+
+table{
+    width: 100%;
+    border: 1px solid rgb(200,200,200);
+    border-collapse: collapse;
+    font-family: 'Lato', sans-serif;
+    font-size: 1.1em;
+
+}
+td, th{
+    border: 1px 0 1px 0 solid #ddd;
+    text-align: left;
+    padding: 10px;
+    border-top: 1px solid rgb(210,210,210);
+    border-bottom: 1px solid rgb(210,210,210);
+}
+
+th:nth-child(1) { width: 3%;  text-align: center;  }
+th:nth-child(2) { width: 30%; text-align: left; }
+th:nth-child(3) { width: 33%; text-align: center; font-size: 1.2em;} 
+th:nth-child(4) { width: 33%; text-align: right;}
+
+td:nth-child(1) {text-align: center;}
+td:nth-child(2) {text-align: left;}
+td:nth-child(3) {text-align: center; font-size: 1.2em;}
+td:nth-child(4) {text-align: right;}
+
+tr:nth-child(odd){background-color: rgba(255,255,255,0.5);}
+tr:nth-child(even){background-color: rgba(220,220,220,0.5);}
