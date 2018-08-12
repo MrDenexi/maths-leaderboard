@@ -2,10 +2,10 @@
   "name": "maths-leaderboard",
   "version": "1.0.0",
   "description": "A leaderboard for the 'Maths is Fun' script - a minigame inside TagPro where players answer arithmic sequences.\r Small and bad example of the script (pay attention to chat and name): https://streamable.com/80wxq",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,7 @@
     "express": "^4.16.3",
     "mongodb": "^3.1.1",
     "node": "^10.8.0",
-    "nodemon": "^1.18.3"
+    "nodemon": "^1.18.3",
+    "pug": "^2.0.3"
   }
 }
