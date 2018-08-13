@@ -9,30 +9,33 @@ html
             h1='Maths is fun' 
             h4='Leaderboard'
         main
-            table 
-                tr
-                    th
-                    th= 'Name'
-                    th= 'Correct answers'
-                    th= 'Last seen'
-                each player, index in players 
-                    - let seen
-                    - let oneDay = 24*60*60*1000
-                    - let days = Math.abs((player.date - Date.now()) /(oneDay))
-                    - console.log(player.date)
-                    if (days < 1)           
-                        - seen = 'Today'
-                    else if ( 1 < days < 2) 
-                        - seen = 'Yesterday'
-                    else                    
-                        - seen = Math.round(days) + ' days ago'
-                    
+            if players.length == 0
+                    h1= "😥"
+            else
+                table 
                     tr
-                        td= index+1   
-                        td
-                            - let posX = -player.flair[0] * 16;
-                            - let posY = -player.flair[1] * 16; 
-                            span(class='flair' style={'background-position': posX+'px '+posY+'px'})
-                            span=player.name
-                        td= player.answers
-                        td= seen
+                        th
+                        th= 'Name'
+                        th= 'Correct answers'
+                        th= 'Last seen'
+                    
+                    each player, index in players 
+                        - let seen
+                        - let oneDay = 24*60*60*1000
+                        - let days = Math.abs((player.date - Date.now()) /(oneDay))
+                        if (days < 1)           
+                            - seen = 'Today'
+                        else if ( 1 < days && days < 2) 
+                            - seen = 'Yesterday'
+                        else                    
+                            - seen = Math.round(days) + ' days ago'
+                        
+                        tr
+                            td= index+1   
+                            td
+                                - let posX = -player.flair[0] * 16;
+                                - let posY = -player.flair[1] * 16; 
+                                span(class='flair' style={'background-position': posX+'px '+posY+'px'})
+                                span=player.name
+                            td= player.answers
+                            td= seen

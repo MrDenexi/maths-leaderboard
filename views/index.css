@@ -2,6 +2,7 @@ body{
     text-align: center;
     background-image: url("squared-paper-texture_1154-677.jpg");
     background-repeat: repeat;
+    font-family: 'Lato', sans-serif;
 }
 header{
     margin: 0 auto;
@@ -23,7 +24,6 @@ table{
     width: 100%;
     border: 1px solid rgb(200,200,200);
     border-collapse: collapse;
-    font-family: 'Lato', sans-serif;
     font-size: 1.1em;
 
 }
