@@ -13,12 +13,13 @@ header{
 header *{ margin: 0}
 
 main{
-    width: 600px;
+    width: 700px;
     margin: 0 auto;
 }
 
 
 table{
+    table-layout:fixed;
     width: 100%;
     border: 1px solid rgb(200,200,200);
     border-collapse: collapse;
@@ -35,14 +36,28 @@ td, th{
 }
 
 th:nth-child(1) { width: 3%;  text-align: center;  }
-th:nth-child(2) { width: 30%; text-align: left; }
-th:nth-child(3) { width: 33%; text-align: center; font-size: 1.2em;} 
-th:nth-child(4) { width: 33%; text-align: right;}
+th:nth-child(2) { width: 32%; text-align: left; }
+
+th:nth-child(3) { width: 24%; text-align: center; font-size: 1.2em;} 
+
+th:nth-child(4) { width: 36%; text-align: right;}
 
 td:nth-child(1) {text-align: center;}
-td:nth-child(2) {text-align: left;}
+td:nth-child(2) {text-align: left; }
+
 td:nth-child(3) {text-align: center; font-size: 1.2em;}
+
 td:nth-child(4) {text-align: right;}
 
 tr:nth-child(odd){background-color: rgba(255,255,255,0.5);}
 tr:nth-child(even){background-color: rgba(220,220,220,0.5);}
+
+.flair {
+    background-image: url(//tagpro-chord.koalabeast.com/images/flair.png);
+    background-position: 1000px 1000px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+}
