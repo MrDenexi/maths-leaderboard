@@ -84,7 +84,7 @@ app.post('/submit', jsonParser, (req, res) => {
 
             for(let i = 0; i < req.body.length; i++) {  //loop through all player objects.
                 let el = req.body[i];                   //selecting element
-                
+                if(!el) continue;                       //go to next element of loop if it's empty;
                 let dbo = db.db("maths");
                 dbo.collection("players").find({name: {$regex: new RegExp('^'+ el.name + '$', "i")} }).limit(1).toArray()   //check if player is already in db
                 .then((foundPlayer) => {
