@@ -17,7 +17,7 @@ function json(response) {
   return response.json()
 }
 
-window.fetch('http://localhost:8002/submit', {
+window.fetch('https://rens.xyz/maths/submit', {
     method: 'POST',
     headers: {
         "Content-type": "application/json",
