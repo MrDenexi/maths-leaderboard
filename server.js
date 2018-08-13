@@ -12,7 +12,7 @@ let murl = "mongodb://localhost:27017/maths";
 const jsonParser = bodyParser.json() // parse application/json
 
 app.set('view engine', 'pug'); // use pug views
-app.use(express.static('static'));
+app.use(express.static('./static'));
 
 app.use(function(req, res, next) { // do header stuff
     res.header("Access-Control-Allow-Origin", "*");
