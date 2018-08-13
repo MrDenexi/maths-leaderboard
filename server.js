@@ -12,7 +12,7 @@ let murl = "mongodb://localhost:27017/maths";
 const jsonParser = bodyParser.json() // parse application/json
 
 app.set('view engine', 'pug'); // use pug views
-app.use(express.static('./static'));
+app.use(express.static('static'));
 
 app.use(function(req, res, next) { // do header stuff
     res.header("Access-Control-Allow-Origin", "*");
@@ -86,7 +86,12 @@ app.post('/submit', jsonParser, (req, res) => {
                 let el = req.body[i];                   //selecting element
                 if(!el) continue;                       //go to next element of loop if it's empty;
                 let dbo = db.db("maths");
-                dbo.collection("players").find({name: {$regex: new RegExp('^'+ el.name + '$', "i")} }).limit(1).toArray()   //check if player is already in db
+
+                function escapeRegExp(string) {      
+                    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+                }
+
+                dbo.collection("players").find({name: {$regex: new RegExp('^'+ escapeRegExp(el.name) + '$', "i")} }).limit(1).toArray()   //check if player is already in db
                 .then((foundPlayer) => {
                     console.log(foundPlayer);
                     if (foundPlayer.length > 0){   //if player is in database -> update answers of player
