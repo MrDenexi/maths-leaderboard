@@ -86,17 +86,27 @@ app.post('/submit', jsonParser, (req, res) => {
                 let el = req.body[i];                   //selecting element
                 
                 let dbo = db.db("maths");
-                dbo.collection("players").find({_id: el._id}).limit(1).hasNext()    //check if player is already in db
+                dbo.collection("players").find({name: {$regex: new RegExp('^'+ el.name + '$', "i")} }).limit(1).toArray()   //check if player is already in db
                 .then((foundPlayer) => {
-                    if (foundPlayer){   //if player is in database -> update answers of player
+                    console.log(foundPlayer);
+                    if (foundPlayer.length > 0){   //if player is in database -> update answers of player
+                        console.log('update', foundPlayer[0]._id, foundPlayer[0].name);
+                        console.log('putting this in there', el);
                         dbo.collection("players").update(
-                            {_id: el._id},
-                            {$inc:{answers: el.answers} },
+                            {_id: foundPlayer[0]._id},
+                            {
+                                $inc:{answers: el.answers},
+                                $set:{
+                                    name: el.name,
+                                    flair: el.flair,
+                                    date: el.date
+                                }
+                            }                           
                         )
-                        .then(() => console.log('updated', el._id))
+                        .then(() => console.log('updated',foundPlayer[0]._id, foundPlayer[0].name))
                         .then(() => { if(i == req.body.length - 1) endUpsert(db, somekindoferror)}) //check if this was the last one -> go to endUpsert
                         .catch((err) => {
-                            console.log('Error at updating', el._id , err);
+                            console.log('Error at updating', el.name , err);
                             somekindoferror = err;
                         });
                     }
@@ -118,7 +128,7 @@ app.post('/submit', jsonParser, (req, res) => {
     }
     function endUpsert(db, somekindoferror){
         let status
-        somekindoferror.errmsg ? status = 400 : status = 200; //check for errormessages, and replace status.
+        somekindoferror ? status = 400 : status = 200; //check for errormessages, and replace status.
         res.sendStatus(status);
         db.close();
         return;
